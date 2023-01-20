@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript student crud using HTML form and A table designing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .tr {
+            background: rgb(121, 121, 213);
+            color: white;
+        }
+    </style>
+    <script>
+            // I can write js code before the clossing of head tag
+
+    </script>
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="myul">
+                        <li>A</li>
+                        <li>B</li>
+                        <li>C</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <input name="name" type="text" placeholder="Enter your Name">
+        <input name="surname" type="text" placeholder="Enter your Surname">
+        <input name="address" type="text" placeholder="Enter your Permanant Address">
+        <input type="button" value="Save" onclick="Virendra('this')">
+    </form>
+    <hr>
+    <table border="2" id="mytable">
+        <thead>
+            <tr class="tr">
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        // I can write js code before the clossing tag body tag
+        // there Are two ways to define A function
+        //1 old way
+        function Vishnu() {
+            alert("Vishnu");
+        }
+        //2 new way Fat Arrow =>Es6 in 2015
+        let x; // x is a global variable 
+        let n = document.querySelector('input[name="name"]');
+        let sn = document.querySelector('input[name="surname"]');
+        let addr = document.querySelector('input[name="address"]');
+
+        let tbdy = document.querySelector('table#mytable tbody')
+        let Virendra = () => {
+            alert("Hello Virendra ");
+            let y; // y is a local variable
+            console.log(n.value);
+            console.log(sn.value);
+            console.log(addr.value);
+            console.log(tbdy);
+            //tbdy.innerHTML = tbdy.innerHTML + '<tr><td>A</td><td>B</td><td>C</td><td>D</td></tr>'; // append technique
+            tbdy.innerHTML += `<tr>
+                                        <td>${n.value}</td>
+                                        <td>${sn.value}</td>
+                                        <td>${addr.value}</td>
+                                        <td>                        
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setData(this)">View</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                            <button class="btn btn-danger onclick="deleteElement(this)">Delete</button>
+                                        </td>
+                                    </tr>`;// we called append technique in js
+            n.value = sn.value = addr.value = '';
+        }
+        let deleteElement = (z) => {
+            //alert("clearscreen");
+            z.closest('tr').remove();
+            console.log(z.closest('tr'));
+        }
+        //How I am defining this function fat arrow notation
+        let setData = (elem)=>{
+            let name = elem.closest('tr').querySelector('td:first-child').innerHTML;
+            let surname = elem.closest('tr').querySelector('td:nth-child(2)').innerHTML;
+            let address = elem.closest('tr').querySelector('td:nth-child(3)').innerHTML;
+            document.querySelector('div.modal-body ul.myul > li:first-child').innerHTML = name;
+            document.querySelector('div.modal-body ul.myul > li:nth-child(2)').innerHTML = surname;
+            document.querySelector('div.modal-body ul.myul > li:nth-child(3)').innerHTML = address;
+        }
+    </script>
+</body>
+</html>
